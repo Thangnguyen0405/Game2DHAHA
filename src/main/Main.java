@@ -20,5 +20,6 @@ public class Main {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
         gp.startGameThread();
+        gp.setUpGame();
     }
 }

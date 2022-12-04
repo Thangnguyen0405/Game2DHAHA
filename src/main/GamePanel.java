@@ -13,8 +13,8 @@ public class GamePanel extends JPanel implements Runnable
     final int originalTileSize =16;
     final int scale=3;
     public final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol =40;
-    public final int maxScreenRow = 30;
+    public final int maxScreenCol =27;
+    public final int maxScreenRow = 15;
     //
     public final int screenWidth = tileSize * maxScreenCol;//1920pixels
     public final int screenHeight = tileSize * maxScreenRow;//1080pixels
@@ -28,13 +28,11 @@ public class GamePanel extends JPanel implements Runnable
     KeyInput Control = new KeyInput();//KeyInput.java
     //
     TileManager tileM= new TileManager(this);
-
     public CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player playerT = new Player(this, Control);
 
     public SuperObject obj[] = new SuperObject[10];
-
-
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -46,6 +44,10 @@ public class GamePanel extends JPanel implements Runnable
         this.setFocusable(true);//KeyInput.java
         //Lam cho cai GamePanel "Focus" vao ban phim
 
+    }
+    public void setUpGame()
+    {
+        aSetter.setObject();
     }
     public void startGameThread()
     {
@@ -131,6 +133,13 @@ public class GamePanel extends JPanel implements Runnable
         super.paintComponent(t);
         Graphics2D t2 = (Graphics2D)t;
         tileM.draw(t2);
+        for(int i =0;i < obj.length;i++)
+        {
+            if(obj[i]!= null )
+            {
+                obj[i].draw(t2, this );
+            }
+        }
         playerT.draw(t2);
         t2.dispose();
         }

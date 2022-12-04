@@ -10,7 +10,7 @@ public class TileManager
 {
     GamePanel gp;
     public Tile[] tile;
-    public int mapTileNum[][];
+    public int[][] mapTileNum;
 
     public TileManager(GamePanel gp)
     {
@@ -25,10 +25,10 @@ public class TileManager
         try
         {
             tile[0]=new Tile();
-            tile[0].image = ImageIO.read(tile.getClass().getResourceAsStream("/tiles/earth.png"));
+            tile[0].image = ImageIO.read(tile.getClass().getResourceAsStream("/tiles/grass01.png"));
 
             tile[1]=new Tile();
-            tile[1].image = ImageIO.read(tile.getClass().getResourceAsStream("/tiles/earth.png"));
+            tile[1].image = ImageIO.read(tile.getClass().getResourceAsStream("/tiles/floor01.png"));
 
             tile[2]=new Tile();
             tile[2].image = ImageIO.read(tile.getClass().getResourceAsStream("/tiles/water01.png"));
@@ -47,8 +47,7 @@ public class TileManager
 
 
         }
-        catch (IOException e)
-        {
+        catch (IOException e){
             e.printStackTrace();
         }
     }
@@ -101,13 +100,13 @@ public class TileManager
             if (       worldX + gp.tileSize> gp.playerT.worldX - gp.playerT.screenX
                     && worldX - gp.tileSize< gp.playerT.worldX+ gp.playerT.screenX
                     && worldY + gp.tileSize> gp.playerT.worldY - gp.playerT.screenY
-                    && worldY - gp.tileSize< gp.playerT.screenY + gp.playerT.screenY)
+                    && worldY - gp.tileSize< gp.playerT.worldY + gp.playerT.screenY)
             {
                 t2.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
             }
 
             worldCol++;
-            if(worldCol == gp.maxScreenCol)
+            if(worldCol == gp.maxWorldCol)
             {
                 worldCol=0;
                 worldRow++;

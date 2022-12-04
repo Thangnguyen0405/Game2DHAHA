@@ -22,13 +22,6 @@ public class Player extends Entity{
         screenX=gp.screenWidth/2 - (gp.tileSize/2);
         screenY=gp.screenHeight/2 - (gp.tileSize/2);
 
-        solidArea = new Rectangle();
-        solidArea.x = 8  ;
-        solidArea.y = 16 ;
-        solidArea.width = 32;
-        solidArea.height = 32;
-
-
         setDefaultValue();
         GetPlayerImage();
     }
@@ -46,14 +39,14 @@ public class Player extends Entity{
     {
         try
         {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
+        up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
+        up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
+        down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
+        down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
+        left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
+        left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
+        right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
+        right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
         }
         catch(IOException e)
         {
@@ -65,51 +58,46 @@ public class Player extends Entity{
         if(Control.upPressed== true|| Control.downPressed == true||
                 Control.rightPressed==true|| Control.leftPressed==true)
         {
-            if(Control.upPressed==true)
-            {
-                direction = "up";
-            }
-            else if(Control.downPressed==true)
-            {
-                direction = "down";
-            }
-            else if(Control.leftPressed==true)
-            {
-                direction = "left";
-            }
-            else if(Control.rightPressed==true)
-            {
-                direction = "right";
-            }
-            //
-            collisionOn = false;
-            gp.cChecker.checkTile(this);
-            //
-            if(collisionOn == false)
-            {
-                switch (direction)
-                {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
-                }
-            }
-            spriteCounter++;
-            if (spriteCounter >32)
-            {
-                if(spriteNum == 1)
-                {
-                    spriteNum = 2;
-                }
-                else if(spriteNum == 2)
-                {
-                    spriteNum = 1;
-                }
-                spriteCounter=0;
-            }
+        if(Control.upPressed==true)
+        {
+            //worldY -= speed;
+            worldY -= speed;
+            direction = "up";
         }
-    }
+        else if(Control.downPressed==true)
+        {
+            //worldY += speed;
+            worldY += speed;
+            direction = "down";
+
+        }
+        else if(Control.leftPressed==true)
+        {
+            //worldX -= speed;
+            worldX -= speed;
+            direction = "left";
+
+        }
+        else if(Control.rightPressed==true)
+        {
+            //worldX += speed;
+            worldX += speed;
+            direction = "right";
+        }
+        spriteCounter++;
+        if (spriteCounter >32)
+        {
+            if(spriteNum == 1)
+            {
+                spriteNum = 2;
+            }
+            else if(spriteNum == 2)
+            {
+                spriteNum = 1;
+            }
+            spriteCounter=0;
+        }
+    }}
 
     public void draw(Graphics2D t2)//cap nhat trang thai cua player tren man hinh
     {
