@@ -1,6 +1,5 @@
 package main;
 import entity.Player;
-import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.JPanel;
@@ -13,8 +12,8 @@ public class GamePanel extends JPanel implements Runnable
     final int originalTileSize =16;
     final int scale=3;
     public final int tileSize = originalTileSize * scale;
-    public final int maxScreenCol =40;
-    public final int maxScreenRow = 30;
+    public final int maxScreenCol =27;
+    public final int maxScreenRow = 15;
     //
     public final int screenWidth = tileSize * maxScreenCol;//1920pixels
     public final int screenHeight = tileSize * maxScreenRow;//1080pixels
@@ -28,13 +27,8 @@ public class GamePanel extends JPanel implements Runnable
     KeyInput Control = new KeyInput();//KeyInput.java
     //
     TileManager tileM= new TileManager(this);
-
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player playerT = new Player(this, Control);
-
-    public SuperObject obj[] = new SuperObject[10];
-
-
 
 
     public GamePanel()
@@ -115,25 +109,25 @@ public class GamePanel extends JPanel implements Runnable
             }
             if(timer >=1000000000)
             {
-                System.out.println("FPS"+ drawCount);
-                drawCount = 0;
-                timer =0;
+               System.out.println("FPS"+ drawCount);
+               drawCount = 0;
+               timer =0;
             }
         }
     }
 
 
     public void update() //Hien thi su duy chuyen cua Player
-    {
-        playerT.update();
-    }
+        {
+            playerT.update();
+        }
 
     public void paintComponent(Graphics t)//cap nhat trang thai cua player tren man hinh
-    {
+        {
         super.paintComponent(t);
         Graphics2D t2 = (Graphics2D)t;
         tileM.draw(t2);
         playerT.draw(t2);
         t2.dispose();
-    }
+        }
 }
