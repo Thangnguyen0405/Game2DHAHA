@@ -1,5 +1,7 @@
 package main;
 
+import object.OBJ_Chest;
+import object.OBJ_Door;
 import object.OBJ_Key;
 
 public class AssetSetter
@@ -17,6 +19,18 @@ public AssetSetter(GamePanel gp)
 
         gp.obj[1] = new OBJ_Key();
         gp.obj[1].worldX = 30* gp.tileSize;
-        gp.obj[1].worldY = 30 * gp.tileSize;
+        gp.obj[1].worldY = 28 * gp.tileSize;
+
+        gp.obj[2] = new OBJ_Chest();
+        gp.obj[2].worldX = 39* gp.tileSize;
+        gp.obj[2].worldY = 10 * gp.tileSize;
+
+        gp.obj[3] = new OBJ_Chest();
+        gp.obj[3].worldX = 39* gp.tileSize;
+        gp.obj[3].worldY = 11 * gp.tileSize;
+
+        gp.obj[4] = new OBJ_Chest();
+        gp.obj[4].worldX = 39* gp.tileSize;
+        gp.obj[4].worldY = 12 * gp.tileSize;
     }
 }
