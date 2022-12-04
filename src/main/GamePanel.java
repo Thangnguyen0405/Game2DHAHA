@@ -28,6 +28,8 @@ public class GamePanel extends JPanel implements Runnable
     KeyInput Control = new KeyInput();//KeyInput.java
     //
     TileManager tileM= new TileManager(this);
+
+    public CollisionChecker cChecker = new CollisionChecker(this);
     public Player playerT = new Player(this, Control);
 
     public SuperObject obj[] = new SuperObject[10];
