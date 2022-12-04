@@ -1,4 +1,4 @@
-package main.object;
+package object;
 
 public class OBJ_Chest {
 }

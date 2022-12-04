@@ -1,4 +1,4 @@
-package main.object;
+package object;
 
 import main.GamePanel;
 
@@ -12,6 +12,10 @@ public class SuperObject
     public String name;
     public boolean collision = false;
     public int worldX, worldY;
+    public Rectangle solidArea;
+    public int solidAreaDefaultX;
+    public int solidAreaDefaultY;
+
     public void draw(Graphics2D t2, GamePanel gp)
     {
         int screenX = worldX - gp.playerT.worldX + gp.playerT.screenX;
