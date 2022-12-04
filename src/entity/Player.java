@@ -67,46 +67,49 @@ public class Player extends Entity{
         {
         if(Control.upPressed==true)
         {
-            //worldY -= speed;
-            worldY -= speed;
             direction = "up";
         }
         else if(Control.downPressed==true)
         {
-            //worldY += speed;
-            worldY += speed;
             direction = "down";
-
         }
         else if(Control.leftPressed==true)
         {
-            //worldX -= speed;
-            worldX -= speed;
             direction = "left";
-
         }
         else if(Control.rightPressed==true)
         {
-            //worldX += speed;
-            worldX += speed;
             direction = "right";
         }
+        //
         collisionOn = false;
         gp.cChecker.checkTile(this);
+        //
+            if(collisionOn == false)
+            {
+                switch (direction)
+                {
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                }
+            }
         spriteCounter++;
         if (spriteCounter >32)
-        {
+             {
             if(spriteNum == 1)
-            {
-                spriteNum = 2;
-            }
+                {
+                    spriteNum = 2;
+                }
             else if(spriteNum == 2)
-            {
-                spriteNum = 1;
-            }
+                {
+                    spriteNum = 1;
+                }
             spriteCounter=0;
+            }
         }
-    }}
+    }
 
     public void draw(Graphics2D t2)//cap nhat trang thai cua player tren man hinh
     {

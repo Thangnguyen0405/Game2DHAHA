@@ -1,5 +1,6 @@
 package main;
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.JPanel;
@@ -30,6 +31,8 @@ public class GamePanel extends JPanel implements Runnable
 
     public CollisionChecker cChecker = new CollisionChecker(this);
     public Player playerT = new Player(this, Control);
+
+    public SuperObject obj[] = new SuperObject[10];
 
 
     public GamePanel()
