@@ -1,6 +1,6 @@
 package main;
 
-import main.object.OBJ_Key;
+import object.OBJ_Key;
 
 public class AssetSetter
 {
