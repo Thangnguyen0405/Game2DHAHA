@@ -1,4 +1,4 @@
-package object;
+package main.object;
 
 import main.GamePanel;
 
