@@ -1,6 +1,6 @@
 package main;
 import entity.Player;
-import object.SuperObject;
+import main.object.SuperObject;
 import tile.TileManager;
 
 import javax.swing.JPanel;
