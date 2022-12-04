@@ -24,10 +24,12 @@ public class GamePanel extends JPanel implements Runnable
     public final int worldWidth = tileSize* maxWorldCol;
     public final int worldHeight = tileSize * maxWorldRow;
     //
-    Thread gameThread;
+
     KeyInput Control = new KeyInput();//KeyInput.java
     //
     TileManager tileM= new TileManager(this);
+    Sound sound = new Sound();
+    Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Player playerT = new Player(this, Control);
@@ -48,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable
     public void setUpGame()
     {
         aSetter.setObject();
+        playMusic(0);
     }
     public void startGameThread()
     {
@@ -143,4 +146,19 @@ public class GamePanel extends JPanel implements Runnable
         playerT.draw(t2);
         t2.dispose();
         }
+    public void playMusic(int i)
+    {
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+    public void stopMusic()
+    {
+        sound.stop();
+    }
+    public void playSE(int i )
+    {
+        sound.setFile(i);
+        sound.play();
+    }
 }
