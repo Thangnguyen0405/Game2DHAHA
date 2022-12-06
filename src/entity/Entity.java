@@ -1,10 +1,13 @@
 package entity;
 
+import main.GamePanel;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity
 {
+    GamePanel gp;
     public int worldX,worldY;
     public int speed;
 //cai nay de gan/ hinh
@@ -17,4 +20,9 @@ public class Entity
     public boolean collisionOn = false;
     public int solidAreaDefaultX;
     public int solidAreaDefaultY;
+
+    public Entity(GamePanel gp)
+    {
+        this.gp=gp;
+    }
 }

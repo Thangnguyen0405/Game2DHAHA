@@ -10,17 +10,16 @@ import java.io.IOException;
 import java.awt.Graphics2D;
 
 public class Player extends Entity{
-    public GamePanel gp;
     public KeyInput Control;
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
-    int hasChestKey = 0;
+
 
 
     public Player(GamePanel gp, KeyInput Control)
     {
-        this.gp=gp;
+        super(gp);
         this.Control=Control;
 
         screenX=gp.screenWidth/2 - (gp.tileSize/2);
@@ -158,6 +157,7 @@ public class Player extends Entity{
                     gp.playSE(4);
                     break;
             }
+
         }
     }
     public void draw(Graphics2D t2)//cap nhat trang thai cua player tren man hinh

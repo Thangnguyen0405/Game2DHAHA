@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements Runnable
     public final int worldHeight = tileSize * maxWorldRow;
     //
 
-    KeyInput Control = new KeyInput();//KeyInput.java
+    KeyInput Control = new KeyInput(this);//KeyInput.java
     //
     TileManager tileM= new TileManager(this);
     Sound sound = new Sound();
@@ -37,6 +37,10 @@ public class GamePanel extends JPanel implements Runnable
     public Player playerT = new Player(this, Control);
 
     public SuperObject obj[] = new SuperObject[100];
+
+    public int gameState;
+    public final int playState = 1;
+    public final int pauseState =2;
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -53,6 +57,8 @@ public class GamePanel extends JPanel implements Runnable
     {
         aSetter.setObject();
         playMusic(0);
+        stopMusic();
+        gameState = playState;
     }
     public void startGameThread()
     {
@@ -130,13 +136,30 @@ public class GamePanel extends JPanel implements Runnable
 
     public void update() //Hien thi su duy chuyen cua Player
         {
-            playerT.update();
+            if(gameState == playState)
+            {
+               playerT.update();
+            }
+            else if(gameState == pauseState)
+            {
+                //nothing
+            }
+
         }
 
     public void paintComponent(Graphics t)//cap nhat trang thai cua player tren man hinh
         {
         super.paintComponent(t);
         Graphics2D t2 = (Graphics2D)t;
+
+        //
+            long drawStart = 0 ;
+
+            if(Control.checkDrawTime == true)
+            {
+                drawStart = System.nanoTime();
+            }
+        //
         tileM.draw(t2);
         for(int i =0;i < obj.length;i++)
         {
@@ -148,8 +171,18 @@ public class GamePanel extends JPanel implements Runnable
         //
         playerT.draw(t2);
         ui.draw(t2);
-        t2.dispose();
-        //
+            //DEBUG
+            if(Control.checkDrawTime ==true )
+            {
+                //debug
+                long drawEnd = System.nanoTime();
+                long passed = drawEnd - drawStart;
+                t2.setColor(Color.white);
+                t2.drawString("Draw Time" + passed, 10, 4000);
+                System.out.println("Draw Time" + passed);
+                t2.dispose();
+            }
+
         }
     public void playMusic(int i)
     {

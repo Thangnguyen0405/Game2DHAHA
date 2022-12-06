@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 public class UI
 {
     GamePanel gp;
+    Graphics2D t2;
     Font arial_40,arial_80B;
 
     BufferedImage keyImage;
@@ -16,7 +17,7 @@ public class UI
     public String message = " ";
     int messageCounter = 0;
     double playtime = 0;
-    DecimalFormat dFormat = new DecimalFormat("#0.00");
+    DecimalFormat dFormat = new DecimalFormat("#0.0");
     public boolean gameFinished = false;
     public UI(GamePanel gp)
     {
@@ -33,7 +34,21 @@ public class UI
         messageOn = true;
 
     }
-    public void draw(Graphics2D t2) {
+    public void draw(Graphics2D t2)
+    {
+        this.t2=t2;
+        t2.setFont(arial_80B);
+        t2.setColor(Color.white);
+        if(gp.gameState == gp.playState)
+        {
+
+        }
+        if(gp.gameState == gp.pauseState)
+        {
+            DrawPauseScreen();
+        }
+
+        //
         if (gameFinished)
         {
             String text;
@@ -90,4 +105,21 @@ public class UI
             }
         }
     }
+    public void DrawPauseScreen()
+    {
+        t2.setFont(t2.getFont().deriveFont(Font.PLAIN,80F));
+        String text = "PAUSED";
+        int x = getXForCenteredText(text) ;
+        int length = (int)t2.getFontMetrics().getStringBounds(text,t2).getWidth();
+        x=gp.screenWidth/2 - length/2;
+        int y = gp.screenHeight/2;
+        t2.drawString(text,x,y);
+    }
+    public int getXForCenteredText(String text)
+    {
+        int length =(int)t2.getFontMetrics().getStringBounds(text,t2).getWidth();
+        int x = gp.screenWidth/2 - length/2;
+        return x;
+    }
+
 }
