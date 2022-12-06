@@ -1,19 +1,18 @@
 package object;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-public class OBJ_Door extends SuperObject
+public class OBJ_Boots extends SuperObject
 {
-    public OBJ_Door()
+    public OBJ_Boots()
     {
-        name = "Door";
+        name = "Boots";
         try
         {
-            image = ImageIO.read(getClass().getResourceAsStream("/ObjectImage/door.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/ObjectImage/boots.png"));
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-        collision = true;
     }
 }

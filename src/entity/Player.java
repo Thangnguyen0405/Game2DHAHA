@@ -15,6 +15,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     int hasKey = 0;
+    int hasChestKey = 0;
 
 
     public Player(GamePanel gp, KeyInput Control)
@@ -119,22 +120,36 @@ public class Player extends Entity{
             }
         }
     }
-    public void pickUpObject(int i){
-        if(i != 999) {
+    public void pickUpObject(int i)
+    {
+        if(i != 999)
+        {
 
             String objectName = gp.obj[i].name;
-            switch (objectName) {
+            switch (objectName)
+            {
                 case "Key":
+                    gp.playSE(1);
                     hasKey++;
                     gp.obj[i] = null;
                     System.out.println("Key: "+hasKey);
                     break;
                 case "Door":
+                    gp.playSE(3);
                     if(hasKey > 0){
                         gp.obj[i] = null;
                         hasKey--;
                     }
                     System.out.println("Key: "+hasKey);
+                    break;
+                case "Boots":
+                    gp.playSE(2);
+                    gp.obj[i] = null;
+                    speed += 4;
+                    break;
+                case "Chest":
+                    gp.playSE(3);
+                    gp.obj[i] = null;
                     break;
             }
         }
