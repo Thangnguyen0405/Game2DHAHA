@@ -36,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable
     public UI ui = new UI(this);
     public Player playerT = new Player(this, Control);
 
-    public SuperObject obj[] = new SuperObject[10];
+    public SuperObject obj[] = new SuperObject[100];
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));

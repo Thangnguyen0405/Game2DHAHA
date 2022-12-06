@@ -54,6 +54,10 @@ public AssetSetter(GamePanel gp)
         gp.obj[9].worldX = 37* gp.tileSize;
         gp.obj[9].worldY = 42 * gp.tileSize;
 
+        gp.obj[10] = new OBJ_Chest();
+        gp.obj[10].worldX = 24* gp.tileSize;
+        gp.obj[10].worldY = 7 * gp.tileSize;
+
 
     }
 }
