@@ -32,6 +32,8 @@ public class GamePanel extends JPanel implements Runnable
     Thread gameThread;
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+
+    public UI ui = new UI(this);
     public Player playerT = new Player(this, Control);
 
     public SuperObject obj[] = new SuperObject[10];
@@ -143,8 +145,11 @@ public class GamePanel extends JPanel implements Runnable
                 obj[i].draw(t2, this );
             }
         }
+        //
         playerT.draw(t2);
+        ui.draw(t2);
         t2.dispose();
+        //
         }
     public void playMusic(int i)
     {
