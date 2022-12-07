@@ -2,12 +2,16 @@ package entity;
 
 import main.GamePanel;
 import main.KeyInput;
+import main.UtilityTool;
+
 import javax.imageio.ImageIO;
 import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.awt.Graphics2D;
+import java.util.Objects;
 
 public class Player extends Entity{
     public KeyInput Control;
@@ -50,23 +54,17 @@ public class Player extends Entity{
     }
     public void GetPlayerImage()
     {
-        try
-        {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
+            up1=setup("/blueBoy/boy_up_1");
+            up2=setup("/blueBoy/boy_up_2");
+            down1=setup("/blueBoy/boy_down_1");
+            down2 = setup("/blueBoy/boy_down_2");
+            left1 = setup("/blueBoy/boy_left_1");
+            left2 = setup("/blueBoy/boy_left_2");
+            right1 = setup("/blueBoy/boy_right_1");
+            right2 = setup("/blueBoy/boy_right_2");
     }
-    public void update() //Cap nhat su duy chuyen cua Player
+
+    public void update()
     {
         if(Control.upPressed== true|| Control.downPressed == true||
                 Control.rightPressed==true|| Control.leftPressed==true)
