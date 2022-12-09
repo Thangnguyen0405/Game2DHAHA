@@ -24,6 +24,9 @@ public class Entity
 =======
     public Rectangle solidArea;
     public int solidAreaDefaultX, solidAreaDefaultY;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     public boolean collisionOn = false;
     public int solidAreaDefaultX;
