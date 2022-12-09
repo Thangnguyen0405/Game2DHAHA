@@ -86,7 +86,7 @@ public class UI
         else
         {
             t2.setFont(arial_40);
-            t2.setColor(Color.lightGray);
+            t2.setColor(Color.white);
             t2.drawImage(keyImage, gp.tileSize / 2, gp.tileSize / 2, gp.tileSize, gp.tileSize, null);
             t2.drawString("x" + gp.playerT.hasKey, 74, 65);
 

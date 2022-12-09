@@ -88,9 +88,11 @@ public class Player extends Entity{
             //CHECK TILE COLLISION
             collisionOn = false;
             gp.cChecker.checkTile(this);
-
+            //CHECK NPC COLLISION
+            int npcIndex = gp.cChecker.checkEntity(this,gp.npc);
             //CHECK OBJECT COLLISION
             int objIndex = gp.cChecker.checkObject(this,true);
+            interaceNPC(npcIndex);
             pickUpObject(objIndex);
             if(collisionOn == false)
             {
@@ -156,6 +158,13 @@ public class Player extends Entity{
                     break;
             }
 
+        }
+    }
+    public void interaceNPC(int i)
+    {
+        if(i != 999)
+        {
+            System.out.println("Thich Dung Cham Ko?");
         }
     }
     public void draw(Graphics2D t2)//cap nhat trang thai cua player tren man hinh

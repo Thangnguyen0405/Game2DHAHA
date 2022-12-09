@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Random;
 
 public class NPC_OldMan extends Entity
 {
@@ -29,5 +30,32 @@ public class NPC_OldMan extends Entity
         left2   = setup("/NPC_OldMan/oldman_left_2");
         right1  = setup("/NPC_OldMan/oldman_right_1");
         right2  = setup("/NPC_OldMan/oldman_right_2");
+    }
+    public void setAction()
+    {
+        actionLockCounter ++;
+        Random random = new Random();
+        int i =random.nextInt(100)+1;
+        if(actionLockCounter ==120)
+        {
+            if(i<25)
+            {
+                direction = "up";
+            }
+            if( i >25 && i <=50)
+            {
+                direction = "down";
+            }
+            if(i>50 && i <=75)
+            {
+                direction = "left";
+            }
+            else if (i >75 && i <=100)
+            {
+                direction = "right";
+            }
+            actionLockCounter=0;
+        }
+
     }
 }
