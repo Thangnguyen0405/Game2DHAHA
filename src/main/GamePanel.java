@@ -2,8 +2,9 @@ package main;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
-
 import javax.swing.JPanel;
+
+import javax.swing.plaf.basic.BasicTreeUI.KeyHandler;
 import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable
@@ -28,6 +29,8 @@ public class GamePanel extends JPanel implements Runnable
     KeyInput Control = new KeyInput();//KeyInput.java
     //
     TileManager tileM= new TileManager(this);
+    //KeyHandler keyH = new KeyHandler();
+    //Sound music = new Sound();
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public Player playerT = new Player(this, Control);

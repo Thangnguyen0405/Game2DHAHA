@@ -135,6 +135,10 @@ public class Player extends Entity{
                     }
                     System.out.println("Key: "+hasKey);
                     break;
+                case "Boot":
+                    speed += 2;
+                    gp.obj[i] = null;
+                    break;
             }
         }
     }
