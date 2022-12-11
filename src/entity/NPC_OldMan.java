@@ -31,6 +31,9 @@ public class NPC_OldMan extends Entity
         right1  = setup("/NPC_OldMan/oldman_right_1");
         right2  = setup("/NPC_OldMan/oldman_right_2");
     }
+    public void setDialogue(){
+        dialogues[0] = "Hello, thang ngu";
+    }
     public void setAction()
     {
         actionLockCounter ++;
@@ -56,6 +59,9 @@ public class NPC_OldMan extends Entity
             }
             actionLockCounter=0;
         }
+    }
+    public void speak(){
 
+        gp.ui.currentDialogue = dialogues[0];
     }
 }

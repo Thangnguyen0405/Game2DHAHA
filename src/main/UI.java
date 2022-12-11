@@ -19,6 +19,7 @@ public class UI
     double playtime = 0;
     DecimalFormat dFormat = new DecimalFormat("#0.0");
     public boolean gameFinished = false;
+    public String currentDialogue = "";
     public UI(GamePanel gp)
     {
         this.gp = gp;
@@ -134,12 +135,16 @@ public class UI
         int height =  gp.tileSize * 4;
 
         drawSubWindow(x,y,width,height);
+
+        x += gp.tileSize;
+        y += gp.tileSize;
+        t2.drawString(currentDialogue,x,y);
     }
 
     public void drawSubWindow(int x, int y, int width, int height){
 
-        Color c = new Color(0,0,0);
-        t2.setColor(Color.BLACK);
+        Color c = new Color(0,0,0,210);
+        t2.setColor(c);
         t2.fillRoundRect(x, y, width, height, 35, 35);
 
         c = new Color(255,255,255);

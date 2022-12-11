@@ -165,6 +165,7 @@ public class Player extends Entity{
         if(i != 999)
         {
             gp.gameState = gp.dialogueState;
+            gp.npc[i].speak();
         }
     }
     public void draw(Graphics2D t2)//cap nhat trang thai cua player tren man hinh
