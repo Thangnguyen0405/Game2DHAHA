@@ -164,7 +164,7 @@ public class Player extends Entity{
     {
         if(i != 999)
         {
-            System.out.println("Thich Dung Cham Ko?");
+            gp.gameState = gp.dialogueState;
         }
     }
     public void draw(Graphics2D t2)//cap nhat trang thai cua player tren man hinh
