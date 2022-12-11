@@ -39,16 +39,20 @@ public class UI
         this.t2=t2;
         t2.setFont(arial_80B);
         t2.setColor(Color.white);
+        // PLAY STATE
         if(gp.gameState == gp.playState)
         {
 
         }
+        // PAUSE STATE
         if(gp.gameState == gp.pauseState)
         {
             DrawPauseScreen();
         }
-
-        //
+        // DIALOGUE STATE
+        if(gp.gameState == gp.dialogueState) {
+            drawDialogueScreen();
+        }
         if (gameFinished)
         {
             String text;
@@ -120,6 +124,28 @@ public class UI
         int length =(int)t2.getFontMetrics().getStringBounds(text,t2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;
+    }
+
+    public void drawDialogueScreen() {
+        //WINDOW
+        int x = gp.tileSize * 2;
+        int y = gp.tileSize / 2;
+        int width = gp.screenWidth - (gp.tileSize * 4);
+        int height =  gp.tileSize * 4;
+
+        drawSubWindow(x,y,width,height);
+    }
+
+    public void drawSubWindow(int x, int y, int width, int height){
+
+        Color c = new Color(0,0,0);
+        t2.setColor(Color.BLACK);
+        t2.fillRoundRect(x, y, width, height, 35, 35);
+
+        c = new Color(255,255,255);
+        t2.setColor(c);
+        t2.setStroke(new BasicStroke(5));
+        t2.drawRoundRect(x+5, y+5, width-10, height-10,25,25);
     }
 
 }
