@@ -25,7 +25,7 @@ public class Entity
     public int solidAreaDefaultY;
     public int actionLockCounter=0;
     String dialogues[] = new String[20];
-
+    int DialogIndex =0;
     public Entity(GamePanel gp)
     {
         this.gp=gp;
