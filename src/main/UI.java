@@ -1,6 +1,8 @@
 package main;
 
+import object.OBJ_Heart;
 import object.OBJ_Key;
+import object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -10,6 +12,7 @@ public class UI
 {
     GamePanel gp;
     Graphics2D t2;
+    BufferedImage heart_full, heart_half, heart_blank;
     Font arial_40,arial_80B;
     Font Edwardian_20;
     BufferedImage keyImage;
@@ -27,6 +30,12 @@ public class UI
         arial_80B = new Font("Arial",Font.BOLD,80);
         OBJ_Key key = new OBJ_Key();
         keyImage = key.image;
+
+        // CREATE HUB OBJECT
+        SuperObject heart = new OBJ_Heart(gp);
+        heart_full = heart.image;
+        heart_half = heart.image2;
+        heart_blank = heart.image3;
     }
     public void showMessage(String text)
     {
@@ -47,10 +56,11 @@ public class UI
         // PLAY STATE
         if(gp.gameState == gp.playState)
         {
+            drawPlayerLife();
             t2.setFont(arial_40);
             t2.setColor(Color.white);
-            t2.drawImage(keyImage, gp.tileSize / 2, gp.tileSize / 2, gp.tileSize, gp.tileSize, null);
-            t2.drawString("x" + gp.playerT.hasKey, 74, 65);
+            t2.drawImage(keyImage, gp.tileSize , gp.tileSize*2 , gp.tileSize , gp.tileSize, null);
+            t2.drawString("x" + gp.playerT.hasKey, 85, 130);
 
             playtime +=(double)1/60;
             t2.drawString("Played Time: "+dFormat.format(playtime),gp.tileSize*19,50);
@@ -70,10 +80,12 @@ public class UI
         if(gp.gameState == gp.pauseState)
         {
             DrawPauseScreen();
+            drawPlayerLife();
         }
         // DIALOGUE STATE
         if(gp.gameState == gp.dialogueState) {
             drawDialogueScreen();
+            drawPlayerLife();
         }
         if (gameFinished)
         {
@@ -109,6 +121,36 @@ public class UI
             //Stop The Game
             gp.gameThread= null;
         }
+    }
+    public void drawPlayerLife(){
+
+        gp.playerT.life = 6;
+
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2;
+        int i = 0;
+        // DRAW BLANK HEART
+        while(i < gp.playerT.MAXlife/2) {
+            t2.drawImage(heart_blank, x, y, null);
+            i++;
+            x += gp.tileSize;
+        }
+
+        x = gp.tileSize/2;
+        y = gp.tileSize/2;
+        i = 0;
+
+        // DRAW CURRENT LIFE
+        while(i < gp.playerT.life) {
+            t2.drawImage(heart_half,x,y,null);
+            i++;
+            if(i < gp.playerT.life){
+                t2.drawImage(heart_full, x, y,null);
+            }
+            i++;
+            x += gp.tileSize;
+        }
+
     }
     public void DrawPauseScreen()
     {
