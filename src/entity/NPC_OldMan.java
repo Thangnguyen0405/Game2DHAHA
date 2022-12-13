@@ -18,6 +18,7 @@ public class NPC_OldMan extends Entity
         direction = "down";
         speed =1;
         GetNPCImage();
+        setDialogue();
 
     }
     public void GetNPCImage()
@@ -31,8 +32,13 @@ public class NPC_OldMan extends Entity
         right1  = setup("/NPC_OldMan/oldman_right_1");
         right2  = setup("/NPC_OldMan/oldman_right_2");
     }
-    public void setDialogue(){
-        dialogues[0] = "Hello, thang ngu";
+    public void setDialogue()
+    {
+        dialogues[0] = "Hello, You Might Go For The Key";
+        dialogues[1] = "Hello, The Doors Were Locked";
+        dialogues[2] = "Hello, You Might Found Something In The Hidden House In The Forest ";
+        dialogues[3] = "Danger Is Always Around The Thing You Are Looking For";
+        dialogues[4] = "Good Luck";
     }
     public void setAction()
     {
@@ -60,8 +66,13 @@ public class NPC_OldMan extends Entity
             actionLockCounter=0;
         }
     }
-    public void speak(){
-
-        gp.ui.currentDialogue = dialogues[0];
+    public void speak()
+    {
+        if(dialogues[DialogIndex]==null)
+        {
+            DialogIndex=0;
+        }
+        gp.ui.currentDialogue = dialogues[DialogIndex];
+        DialogIndex++;
     }
 }

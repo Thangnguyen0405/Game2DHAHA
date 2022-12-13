@@ -21,33 +21,51 @@ public class KeyInput implements KeyListener
     public void keyPressed(KeyEvent e)//Bam phim
     {
         int code = e.getKeyCode();
-        if (code == KeyEvent.VK_UP|| code ==KeyEvent.VK_W)
+        if(gp.gameState==gp.playState)
         {
-            upPressed = true;
-        }
-        else if (code == KeyEvent.VK_DOWN || code ==KeyEvent.VK_S)
-        {
-            downPressed = true;
-        }
-        else if (code == KeyEvent.VK_LEFT || code ==KeyEvent.VK_A)
-        {
-            leftPressed = true;
-        }
-        else if (code == KeyEvent.VK_RIGHT || code ==KeyEvent.VK_D)
-        {
-            rightPressed = true;
-        }
-        if (code == KeyEvent.VK_P)
-        {
-            if(gp.gameState == gp.playState)
+            if (code == KeyEvent.VK_UP|| code ==KeyEvent.VK_W)
+            {
+                upPressed = true;
+            }
+            else if (code == KeyEvent.VK_DOWN || code ==KeyEvent.VK_S)
+            {
+                downPressed = true;
+            }
+            else if (code == KeyEvent.VK_LEFT || code ==KeyEvent.VK_A)
+            {
+                leftPressed = true;
+            }
+            else if (code == KeyEvent.VK_RIGHT || code ==KeyEvent.VK_D)
+            {
+                rightPressed = true;
+            }
+            if (code == KeyEvent.VK_P)
             {
                 gp.gameState = gp.pauseState;
             }
-            else if(gp.gameState == gp.pauseState)
+        }
+        else if(gp.gameState == gp.pauseState)
+        {
+            if (code == KeyEvent.VK_P)
             {
                 gp.gameState = gp.playState;
             }
         }
+        else if(gp.gameState == gp.dialogueState)
+        {
+            if (code == KeyEvent.VK_ENTER)
+            {
+                gp.gameState= gp.playState;
+            }
+        }
+        else if(gp.gameState == gp.TileState)
+        {
+            if(code == KeyEvent.VK_SPACE)
+            {
+                gp.gameState = gp.playState;
+            }
+        }
+
         //DEBUG
         if (code == KeyEvent.VK_T)
         {

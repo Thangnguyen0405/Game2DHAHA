@@ -41,6 +41,7 @@ public class GamePanel extends JPanel implements Runnable
     public final int playState = 1;
     public final int pauseState =2;
     public final int dialogueState = 3;
+    public final int TileState = 0;
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -58,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable
         aSetter.setObject();
         aSetter.setNPC();
         playMusic(0);
-        gameState = playState;
+        gameState = TileState;
     }
     public void startGameThread()
     {
@@ -166,25 +167,28 @@ public class GamePanel extends JPanel implements Runnable
             {
                 drawStart = System.nanoTime();
             }
-        //
-        tileM.draw(t2);
-        for(int i =0;i < obj.length;i++)
-        {
-            if(obj[i]!= null )
+            if(gameState==TileState)
             {
-                obj[i].draw(t2, this );
+                ui.draw(t2);
             }
-        }
-        for(int i =0; i <npc.length;i++)
-        {
-            if(npc[i]!=null)
-            {
-                npc[i].draw(t2);
-            }
-        }
+            else {
+                //
+                tileM.draw(t2);
+                for (int i = 0; i < obj.length; i++) {
+                    if (obj[i] != null) {
+                        obj[i].draw(t2, this);
+                    }
+                }
+                for (int i = 0; i < npc.length; i++) {
+                    if (npc[i] != null) {
+                        npc[i].draw(t2);
+                    }
+                }
+
         //
         playerT.draw(t2);
         ui.draw(t2);
+            }
             //DEBUG
             if(Control.checkDrawTime ==true )
             {
