@@ -98,6 +98,10 @@ public class Player extends Entity{
             int objIndex = gp.cChecker.checkObject(this,true);
             interactNPC(npcIndex);
             pickUpObject(objIndex);
+
+            //CHECK EVENT
+            gp.eHandler.checkEvent();
+
             if(collisionOn == false)
             {
                 switch (direction)
