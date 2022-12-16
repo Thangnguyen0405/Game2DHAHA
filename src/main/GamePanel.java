@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements Runnable
     public final int worldHeight = tileSize * maxWorldRow;
     //
 
-    KeyInput Control = new KeyInput(this);//KeyInput.java
+    public KeyInput Control = new KeyInput(this);//KeyInput.java
     //
     TileManager tileM= new TileManager(this);
     Sound sound = new Sound();

@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyInput implements KeyListener
 {
+    public boolean enterPressed;
     GamePanel gp;
     public boolean upPressed,downPressed,leftPressed,rightPressed;
     boolean checkDrawTime = false;

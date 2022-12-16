@@ -102,6 +102,8 @@ public class Player extends Entity{
             //CHECK EVENT
             gp.eHandler.checkEvent();
 
+            gp.Control.enterPressed = false;
+
             if(collisionOn == false)
             {
                 switch (direction)
@@ -172,6 +174,7 @@ public class Player extends Entity{
     {
         if(i != 999)
         {
+
             gp.gameState = gp.dialogueState;
             gp.npc[i].speak();
         }
