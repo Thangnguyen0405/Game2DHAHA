@@ -11,7 +11,7 @@ public class Main
         //Bam dau X thi tat luon chuong trinh
         window.setResizable(true);
         //Doi kich thuoc man hinh game
-        window.setTitle("HAHAHA");
+        window.setTitle("Pirate King");
         //Game Name
         GamePanel gp = new GamePanel();
         window.add(gp);
