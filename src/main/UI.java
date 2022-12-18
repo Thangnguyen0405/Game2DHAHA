@@ -13,7 +13,7 @@ public class UI
     GamePanel gp;
     Graphics2D t2;
     BufferedImage heart_full, heart_half, heart_blank;
-    Font arial_40,arial_80B;
+    Font arial_40,arial_80B, JokermanRegular;
     Font Edwardian_20;
     BufferedImage keyImage;
     public boolean messageOn= false;
@@ -28,6 +28,7 @@ public class UI
         this.gp = gp;
         arial_40 = new Font("Elephant",Font.PLAIN,20);
         arial_80B = new Font("Arial",Font.BOLD,80);
+        JokermanRegular= new Font("Jokerman", Font.BOLD, 120);
         OBJ_Key key = new OBJ_Key();
         keyImage = key.image;
 
@@ -164,12 +165,33 @@ public class UI
     }
     public void drawTileScreen()
     {
-        t2.setFont(arial_40);
-        String text = "HAHAHA";
+        t2.setFont(JokermanRegular);
+        String text = "Pirate King";
         int x = getXForCenteredText(text);
-        int y = gp.tileSize*3;
+        int y = gp.tileSize*7;
         t2.setColor(Color.white);
         t2.drawString(text,x,y);
+
+        t2.setFont(arial_40);
+        String text2 = "Find Somthings Unlock SomeThing";
+        int x1 = getXForCenteredText(text2);
+        int y1 = gp.tileSize*8;
+        t2.setColor(Color.white);
+        t2.drawString(text2,x1,y1);
+
+        t2.setFont(arial_40);
+        String text3 = "Press SpaceBar To Start";
+        int x2 = getXForCenteredText(text2);
+        int y2 = gp.tileSize*11;
+        t2.setColor(Color.white);
+        t2.drawString(text3,x2,y2);
+
+        t2.setFont(arial_40);
+        String text4 = "Exit";
+        int x3 = getXForCenteredText(text2);
+        int y3 = gp.tileSize*13;
+        t2.setColor(Color.white);
+        t2.drawString(text4,x3,y3);
     }
     public void drawDialogueScreen() {
         //WINDOW
