@@ -10,3 +10,6 @@ Object
 Tile
 
 ![tile drawio](https://user-images.githubusercontent.com/91870430/208343677-40c89c19-1d0c-474a-8aa7-025e5dcae963.png)
+Entity
+
+![Entityio drawio](https://user-images.githubusercontent.com/91870430/208353988-eef386df-7768-4d83-9bd8-3526a4953bc6.png)
