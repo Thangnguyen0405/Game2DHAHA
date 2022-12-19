@@ -1,12 +1,11 @@
 package main;
 import entity.Entity;
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
+
 import javax.swing.JPanel;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable
 {
@@ -37,9 +36,8 @@ public class GamePanel extends JPanel implements Runnable
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
     public Player playerT = new Player(this, Control);
-    public Entity obj[] = new Entity[100];
+    public SuperObject obj[] = new SuperObject[100];
     public Entity npc[] = new Entity[10];
-    ArrayList<Entity> entityList = new ArrayList<>();
     public int gameState;
     public final int playState = 1;
     public final int pauseState =2;
@@ -174,44 +172,23 @@ public class GamePanel extends JPanel implements Runnable
             {
                 ui.draw(t2);
             }
-            else{
-                // TILE
+            else {
+                //
                 tileM.draw(t2);
-
-                // ADD ENTITY TO THE LIST
-                entityList.add(playerT);
-
-                for(int i = 0; i< npc.length; i++){
-                    if(npc[i] != null){
-                        entityList.add(npc[i]);
+                for (int i = 0; i < obj.length; i++) {
+                    if (obj[i] != null) {
+                        obj[i].draw(t2, this);
+                    }
+                }
+                for (int i = 0; i < npc.length; i++) {
+                    if (npc[i] != null) {
+                        npc[i].draw(t2);
                     }
                 }
 
-                for(int i = 0; i < obj.length; i++){
-                    if(obj[i] != null){
-                        entityList.add(obj[i]);
-                    }
-                }
-
-                // SORT
-                Collections.sort(entityList, new Comparator<Entity>() {
-                    @Override
-                    public int compare(Entity e1, Entity e2) {
-                        int result = Integer.compare(e1.worldY, e2.worldY);
-                        return result;
-                    }
-                });
-
-                // DRAW ENTITIES
-                for(int i = 0; i < entityList.size(); i++) {
-                    entityList.get(i).draw(t2);
-                }
-                for (int i = 0; i < entityList.size(); i++){
-                    entityList.remove(i);
-                }
-
-                // UI
-                ui.draw(t2);
+        //
+        playerT.draw(t2);
+        ui.draw(t2);
             }
             //DEBUG
             if(Control.checkDrawTime ==true )
@@ -222,9 +199,9 @@ public class GamePanel extends JPanel implements Runnable
                 t2.setColor(Color.white);
                 t2.drawString("Draw Time" + passed, 10, 4000);
                 System.out.println("Draw Time" + passed);
-
+                t2.dispose();
             }
-            t2.dispose();
+
         }
     public void playMusic(int i)
     {
