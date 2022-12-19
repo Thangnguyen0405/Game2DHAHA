@@ -15,7 +15,7 @@ public class Entity
     public int speed;
 //cai nay de gan/ hinh
     public BufferedImage up1,up2,down1,down2,right1,right2,left1,left2;
-    public String direction;
+    public String direction = "down";
 //cai nay de lam hoat anh
     public int spriteCounter=0;
     public int spriteNum=1;
@@ -26,6 +26,9 @@ public class Entity
     public int actionLockCounter=0;
     String dialogues[] = new String[20];
     int DialogIndex =0;
+    public BufferedImage image, image2, image3;
+    public String name;
+    public boolean collision = false;
 
     //CHARACTER STATUS
     public int MAXlife;

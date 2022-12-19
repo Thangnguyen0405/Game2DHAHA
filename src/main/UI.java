@@ -1,8 +1,9 @@
 package main;
 
+import entity.Entity;
 import object.OBJ_Heart;
 import object.OBJ_Key;
-import object.SuperObject;
+
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,11 +30,11 @@ public class UI
         arial_40 = new Font("Elephant",Font.PLAIN,20);
         arial_80B = new Font("Arial",Font.BOLD,80);
         JokermanRegular= new Font("Jokerman", Font.BOLD, 120);
-        OBJ_Key key = new OBJ_Key();
+        OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
 
         // CREATE HUB OBJECT
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image;
         heart_half = heart.image2;
         heart_blank = heart.image3;
