@@ -134,3 +134,4 @@ public class Entity
         t2.drawImage(image,screenX,screenY,gp.tileSize,gp.tileSize,null);
     }
 }
+
