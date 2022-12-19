@@ -1,5 +1,23 @@
-# Pirate King
+# LAST_HOPE Team's OOP Project
+1. About Team: 
 
+Tôn Thất Minh Vũ _ ITITIU20356
+
+Nguyễn Vạn Huy   _ ITITIU20215
+
+Nguyễn Cao Thắng _ ITITIU20305
+
+
+2. About game:
+- Game's name: PIRATE KING
+- Game's Genre: 2D, casual, detective
+- Game's rule:
+  1. You will be sponsored in the middle of the map and run to find the key for opening the door, fianlly finding the treasure.
+  2. You can also develop your body by collecting the boost in the map. It wwil upgrade your speed.
+  3. The game will be finished when you collected the treasure.
+  
+ 
+3. UML CLASS DIAGRAM: 
 
 
 
