@@ -73,4 +73,8 @@ public class AssetSetter {
         gp.npc[3].worldX = gp.tileSize *37;
         gp.npc[3].worldY = gp.tileSize *10;
     }
+
+    public void setMonster(){
+        
+    }
 }

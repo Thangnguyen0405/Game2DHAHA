@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable
     TileManager tileM= new TileManager(this);
     Sound sound = new Sound();
     Thread gameThread;
+
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
@@ -38,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable
     public Player playerT = new Player(this, Control);
     public SuperObject obj[] = new SuperObject[100];
     public Entity npc[] = new Entity[10];
+    public Entity Monster[] = new Entity[20];
     public int gameState;
     public final int playState = 1;
     public final int pauseState =2;
