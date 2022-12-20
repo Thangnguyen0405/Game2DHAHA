@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements Runnable
     public Player playerT = new Player(this, Control);
     public SuperObject obj[] = new SuperObject[100];
     public Entity npc[] = new Entity[10];
-    public Entity Monster[] = new Entity[20];
+    public Entity monster[] = new Entity[20];
     public int gameState;
     public final int playState = 1;
     public final int pauseState =2;
@@ -62,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         aSetter.setObject();
         aSetter.setNPC();
+        aSetter.setMonster();
         playMusic(0);
         gameState = TileState;
     }
@@ -150,6 +151,11 @@ public class GamePanel extends JPanel implements Runnable
                    if(npc[i]!=null)
                    {
                        npc[i].update();
+                   }
+               }
+               for(int i = 0; i < monster.length; i++){
+                   if(monster[i] != null){
+                       monster[i].update();
                    }
                }
             }
