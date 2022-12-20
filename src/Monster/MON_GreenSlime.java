@@ -1,4 +1,4 @@
-package monster;
+package Monster;
 
 import entity.Entity;
 import main.GamePanel;
@@ -8,6 +8,7 @@ import java.util.Random;
 public class MON_GreenSlime extends Entity {
     public MON_GreenSlime(GamePanel gp){
         super(gp);
+        direction = "down";
 
         speed = 1;
         MAXlife = 4;
