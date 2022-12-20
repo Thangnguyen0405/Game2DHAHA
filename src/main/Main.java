@@ -16,7 +16,7 @@ public class Main
         GamePanel gp = new GamePanel();
         window.add(gp);
         window.pack();//cause window to be sized fit to the referred size and layout fit to its  subcomponent
-        window.setLocationRelativeTo(null);
+         window.setLocationRelativeTo(null);
         window.setVisible(true);
         gp.startGameThread();
         gp.setUpGame();
