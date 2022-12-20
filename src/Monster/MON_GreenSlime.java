@@ -10,6 +10,8 @@ public class MON_GreenSlime extends Entity {
         super(gp);
         direction = "down";
 
+        type = 2;
+
         speed = 1;
         MAXlife = 4;
         life = MAXlife;
