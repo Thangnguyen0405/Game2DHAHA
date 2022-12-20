@@ -77,13 +77,12 @@ public class EventHandler {
 
     }
     public void healingPool(int gameState) {
-        if(gp.Control.enterPressed == true){
+
             gp.gameState = gameState;
             gp.ui.currentDialogue = "You drink the water.\nYour life has been recovered.";
             gp.playerT.life = gp.playerT.MAXlife;
         }
 
-    }
 
 
 }
