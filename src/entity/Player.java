@@ -47,6 +47,8 @@ public class Player extends Entity{
 
         worldX = gp.tileSize*23;
         worldY = gp.tileSize*21;
+//        worldX = gp.tileSize*10;
+//        worldY = gp.tileSize*13;
 //        worldX = 100;
 //        worldY = 100;
         speed=4;
@@ -99,6 +101,10 @@ public class Player extends Entity{
             interactNPC(npcIndex);
             pickUpObject(objIndex);
 
+            //CHECK MONSTER COLLISION
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            contactMonter(monsterIndex);
+
             //CHECK EVENT
             gp.eHandler.checkEvent();
 
@@ -126,6 +132,15 @@ public class Player extends Entity{
                     spriteNum = 1;
                 }
                 spriteCounter=0;
+            }
+        }
+
+        // This needs to be outside of key if statement!
+        if(invincible == true){
+            invincibleCounter++;
+            if(invincibleCounter > 60){
+                invincible = false;
+                invincibleCounter = 0;
             }
         }
     }
@@ -179,6 +194,19 @@ public class Player extends Entity{
             gp.npc[i].speak();
         }
     }
+
+    public void contactMonter(int i){
+
+        if(i != 999){
+            if(invincible == false) {
+                life -= 1;
+                invincible = true;
+
+            }
+
+        }
+
+    }
     public void draw(Graphics2D t2)//cap nhat trang thai cua player tren man hinh
     {
         //t2.setColor(Color.white);
@@ -218,6 +246,20 @@ public class Player extends Entity{
                 }
             }
         }
+
+        if(invincible == true){
+
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+
+        }
         t2.drawImage(image,screenX,screenY,gp.tileSize,gp.tileSize,null);
+
+        //Reset alpha
+        t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+        //DEBUG
+//        t2.setFont(new Font("Arial", Font.PLAIN, 26));
+//        t2.setColor(Color.white);
+//        t2.drawString("Invincible:"+invincibleCounter, 10, 400);
     }
 }
