@@ -37,7 +37,8 @@ public class Player extends Entity{
         solidArea.width = 32;
         solidArea.height = 32;
 
-
+        attackArea.width = 36;
+        attackArea.height = 36;
 
         setDefaultValue();
         GetPlayerImage();
@@ -121,7 +122,7 @@ public class Player extends Entity{
 
             //CHECK MONSTER COLLISION
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-            contactMonter(monsterIndex);
+            contactMonster(monsterIndex);
 
             //CHECK EVENT
             gp.eHandler.checkEvent();
@@ -174,6 +175,35 @@ public class Player extends Entity{
         }
         if(spriteCounter > 5 && spriteCounter <= 25){
             spriteNum = 2;
+
+            //Save the current worldX, worldY, solidArea
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidth = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            //Adjust player's worldX,Y for the attackArea
+            switch(direction){
+                case "up": worldY -= attackArea.height; break;
+                case "down": worldY += attackArea.height; break;
+                case "left": worldX -= attackArea.width; break;
+                case "right": worldX += attackArea.width; break;
+            }
+
+            //attackArea becomes solidArea
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            //Check monster collision with the updated worldX, worldY and solidArea
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            damageMonster(monsterIndex);
+
+            // After checking collision, restore the original data
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
+
         }
         if(spriteCounter > 25) {
             spriteNum = 1;
@@ -225,16 +255,18 @@ public class Player extends Entity{
     }
     public void interactNPC(int i)
     {
+        if(gp.Control.enterPressed == true) {
             if (i != 999) {
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
-            } else if(gp.Control.enterPressed == true) {
+            } else {
                 attacking = true;
             }
+        }
     }
 
 
-    public void contactMonter(int i){
+    public void contactMonster(int i){
 
         if(i != 999){
             if(invincible == false) {
@@ -246,10 +278,32 @@ public class Player extends Entity{
         }
 
     }
+
+    public void damageMonster(int i){
+
+        if(i != 999){
+
+            if(gp.monster[i].invincible == false){
+
+                gp.monster[i].life -= 1;
+                gp.monster[i].invincible = true;
+
+                if(gp.monster[i].life <= 0){
+                    gp.monster[i].dying = true;
+                }
+            }
+
+        }
+
+    }
     public void draw(Graphics2D t2)//cap nhat trang thai cua player tren man hinh
     {
         //t2.setColor(Color.white);
         //t2.fillRect(x,y,gp.tileSize,gp.tileSize);
+
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
+
         BufferedImage image = null;
         switch (direction) {
             case "up" -> {
@@ -262,6 +316,7 @@ public class Player extends Entity{
                     }
                 }
                 if (attacking == true) {
+                    tempScreenY = screenY - gp.tileSize;
                     if (spriteNum == 1) {
                         image = attackUp1;
                     }
@@ -300,6 +355,7 @@ public class Player extends Entity{
                     }
                 }
                 if (attacking == true) {
+                    tempScreenX = screenX - gp.tileSize;
                     if (spriteNum == 1) {
                         image = attackLeft1;
                     }
@@ -335,7 +391,7 @@ public class Player extends Entity{
             t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
 
         }
-        t2.drawImage(image,screenX,screenY,gp.tileSize,gp.tileSize,null);
+        t2.drawImage(image,tempScreenX,tempScreenY,null);
 
         //Reset alpha
         t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
