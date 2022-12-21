@@ -14,6 +14,7 @@ public class Entity
     public BufferedImage up1,up2,down1,down2,right1,right2,left1,left2;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public Rectangle solidArea = new Rectangle(0,0,48,48);
+    public Rectangle attackArea = new Rectangle(0,0,0,0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     String dialogues[] = new String[20];
 
@@ -21,6 +22,7 @@ public class Entity
     public int actionLockCounter=0;
     public int invincibleCounter = 0;
     public int spriteCounter=0;
+    int dyingCounter = 0;
 
     //STATE
     public int worldX,worldY;
@@ -30,6 +32,8 @@ public class Entity
     public boolean collisionOn = false;
     public boolean invincible = false;
     boolean attacking = false;
+    boolean alive = true;
+    boolean dying = false;
 
     //CHARACTER ATTRIBUTES
     public int type; //0=player, 1=npc, 2=monster
@@ -98,6 +102,13 @@ public class Entity
             }
             spriteCounter=0;
         }
+        if(invincible == true){
+            invincibleCounter++;
+            if(invincibleCounter > 40){
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
     public void draw(Graphics2D t2)
     {
@@ -113,39 +124,65 @@ public class Entity
         }
         switch (direction) {
             case "up" -> {
-                if (spriteNum == 1) {
-                    image = up1;
-                }
-                if (spriteNum == 2) {
-                    image = up2;
-                }
+                if (spriteNum == 1) { image = up1; }
+                if (spriteNum == 2) { image = up2;}
             }
             case "down" -> {
-                if (spriteNum == 1) {
-                    image = down1;
-                }
-                if (spriteNum == 2) {
-                    image = down2;
-                }
+                if (spriteNum == 1) { image = down1; }
+                if (spriteNum == 2) { image = down2;}
             }
             case "left" -> {
-                if (spriteNum == 1) {
-                    image = left1;
-                }
-                if (spriteNum == 2) {
-                    image = left2;
-                }
+                if (spriteNum == 1) { image = left1; }
+                if (spriteNum == 2) { image = left2; }
             }
             case "right" -> {
-                if (spriteNum == 1) {
-                    image = right1;
-                }
-                if (spriteNum == 2) {
-                    image = right2;
-                }
+                if (spriteNum == 1) { image = right1; }
+                if (spriteNum == 2) { image = right2; }
             }
         }
+        if(invincible == true){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+        }
+        if(dying == true){
+            dyingAnimation(t2);
+        }
+
         t2.drawImage(image,screenX,screenY,gp.tileSize,gp.tileSize,null);
+
+        t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+    }
+    public void dyingAnimation(Graphics2D t2){
+
+        dyingCounter++;
+        if(dyingCounter <= 5){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
+        if(dyingCounter > 5 && dyingCounter <= 10){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        }
+        if(dyingCounter > 10 && dyingCounter <= 15){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
+        if(dyingCounter > 15 && dyingCounter <= 20){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        }
+        if(dyingCounter > 20 && dyingCounter <= 25){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
+        if(dyingCounter > 25 && dyingCounter <= 30){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        }
+        if(dyingCounter > 30 && dyingCounter <= 35){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
+        if(dyingCounter > 35 && dyingCounter <= 40){
+            t2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        }
+        if(dyingCounter > 40){
+            dying = false;
+            alive = false;
+        }
     }
 }
+
 
