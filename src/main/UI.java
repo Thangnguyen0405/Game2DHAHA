@@ -213,15 +213,15 @@ public class UI
     public void drawCharacterScreen(){
 
         //CREATE A FRAME
-        final int frameX = gp.tileSize*2;
+        final int frameX = gp.tileSize;
         final int frameY = gp.tileSize;
         final int frameWidth = gp.tileSize*5;
-        final int frameHeight = gp.tileSize*10;
+        final int frameHeight = gp.tileSize*9;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
         //TEXT
         t2.setColor(Color.white);
-        t2.setFont(t2.getFont().deriveFont(32F));
+        t2.setFont(t2.getFont().deriveFont(25F));
 
         int testX = frameX + 20;
         int testY = frameY + gp.tileSize;
@@ -258,6 +258,54 @@ public class UI
         String value;
 
         value = String.valueOf(gp.playerT.level);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.life + "/" + gp.playerT.MAXlife);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.strength);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.dexterity);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.attack);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.defense);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.exp);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.nextLevelExp);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.coin);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+
+        t2.drawImage(gp.playerT.currentWeapon.image, tailX - gp.tileSize + 25, testY + 20, null);
+        testY += gp.tileSize +10;
+
+        t2.drawImage(gp.playerT.currentShield.image, tailX - gp.tileSize + 25, testY, null);
+
 
     }
     public void drawSubWindow(int x, int y, int width, int height){
@@ -275,6 +323,13 @@ public class UI
     {
         int length =(int)t2.getFontMetrics().getStringBounds(text,t2).getWidth();
         int x = gp.screenWidth/2 - length/2;
+        return x;
+    }
+
+    public int getXForAlignToRightText(String text, int tailX)
+    {
+        int length =(int)t2.getFontMetrics().getStringBounds(text,t2).getWidth();
+        int x = tailX - length;
         return x;
     }
 }
