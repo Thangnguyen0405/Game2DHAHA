@@ -44,6 +44,9 @@ public class KeyInput implements KeyListener
             {
                 gp.gameState = gp.pauseState;
             }
+            if (code == KeyEvent.VK_ENTER){
+                enterPressed = true;
+            }
         }
         else if(gp.gameState == gp.pauseState)
         {
