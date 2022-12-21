@@ -11,40 +11,44 @@ import java.io.IOException;
 public class Entity
 {
     GamePanel gp;
-    public int worldX,worldY;
-    public int speed;
-//cai nay de gan/ hinh
     public BufferedImage up1,up2,down1,down2,right1,right2,left1,left2;
-    public String direction;
-//cai nay de lam hoat anh
-    public int spriteCounter=0;
-    public int spriteNum=1;
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public Rectangle solidArea = new Rectangle(0,0,48,48);
-    public boolean collisionOn = false;
-    public int type; //0=player, 1=npc, 2=monster
-    public int solidAreaDefaultX;
-    public int solidAreaDefaultY;
-    public int actionLockCounter=0;
-    public boolean invincible = false;
-    public int invincibleCounter = 0;
+    public int solidAreaDefaultX, solidAreaDefaultY;
     String dialogues[] = new String[20];
-    int DialogIndex =0;
 
-    //CHARACTER STATUS
+    //COUNTER
+    public int actionLockCounter=0;
+    public int invincibleCounter = 0;
+    public int spriteCounter=0;
+
+    //STATE
+    public int worldX,worldY;
+    public String direction;
+    int DialogIndex =0;
+    public int spriteNum=1;
+    public boolean collisionOn = false;
+    public boolean invincible = false;
+    boolean attacking = false;
+
+    //CHARACTER ATTRIBUTES
+    public int type; //0=player, 1=npc, 2=monster
+    public int speed;
     public int MAXlife;
     public int life;
+
     public Entity(GamePanel gp)
     {
         this.gp=gp;
     }
-     public BufferedImage setup(String imageName)
+     public BufferedImage setup(String imageName, int width, int height)
     {
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
         try
         {
             image = ImageIO.read(getClass().getResourceAsStream( imageName +".png"));
-            image = uTool.scaleImage(image, gp.tileSize,gp.tileSize);
+            image = uTool.scaleImage(image, width,height);
         }
         catch (IOException e)
         {
@@ -52,10 +56,7 @@ public class Entity
         }
         return image;
     }
-    public void setAction()
-    {
-
-    }
+    public void setAction() { }
     public void speak() { }
     public void update()
     {
