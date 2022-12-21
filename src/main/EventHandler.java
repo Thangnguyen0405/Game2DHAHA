@@ -1,5 +1,6 @@
 package main;
 
+import javax.naming.ldap.Control;
 import java.awt.*;
 
 public class EventHandler {
@@ -77,12 +78,13 @@ public class EventHandler {
 //
 //    }
     public void healingPool(int gameState) {
+        if (gp.Control.enterPressed == true) {
 
             gp.gameState = gameState;
+            gp.playerT.attackCanceled = true;
+            gp.playSE(2);
             gp.ui.currentDialogue = "You drink the water.\nYour life has been recovered.";
             gp.playerT.life = gp.playerT.MAXlife;
         }
-
-
-
+    }
 }

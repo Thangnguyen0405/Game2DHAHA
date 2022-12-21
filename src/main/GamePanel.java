@@ -9,42 +9,45 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable
 {
+    //FPS
     int FPS = 60;
+
     //Set Man Hinh
     final int originalTileSize =16;
     final int scale=3;
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol =27;
     public final int maxScreenRow = 15;
-    //
     public final int screenWidth = tileSize * maxScreenCol;//1920pixels
     public final int screenHeight = tileSize * maxScreenRow;//1080pixels
+
     //MAP SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize* maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
-    //
 
+    //SYSTEM
     public KeyInput Control = new KeyInput(this);//KeyInput.java
-    //
     TileManager tileM= new TileManager(this);
     Sound sound = new Sound();
     Thread gameThread;
-
     public CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+
+    //ENTITY AND OBJECT
     public Player playerT = new Player(this, Control);
     public SuperObject obj[] = new SuperObject[100];
     public Entity npc[] = new Entity[10];
     public Entity monster[] = new Entity[10];
+
+    //GAME STATE
     public int gameState;
+    public final int TileState = 0;
     public final int playState = 1;
     public final int pauseState =2;
     public final int dialogueState = 3;
-    public final int TileState = 0;
+    public final int characterState = 4;
     
     public GamePanel()
     {

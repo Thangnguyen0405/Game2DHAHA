@@ -2,6 +2,8 @@ package entity;
 
 import main.GamePanel;
 import main.UtilityTool;
+import object.OBJ_Shield_Wood;
+import object.OBJ_Sword_Normal;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -42,6 +44,17 @@ public class Entity
     public int speed;
     public int MAXlife;
     public int life;
+    public int level;
+    public int strength;
+    public int dexterity;
+    public int attack;
+    public int defense;
+    public int exp;
+    public int nextLevelExp;
+    public int coin;
+    public OBJ_Sword_Normal currentWeapon;
+    public OBJ_Shield_Wood currentShield;
+
 
     public Entity(GamePanel gp)
     {

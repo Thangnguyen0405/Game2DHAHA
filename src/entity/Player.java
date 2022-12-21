@@ -3,6 +3,9 @@ package entity;
 import main.GamePanel;
 import main.KeyInput;
 import main.UtilityTool;
+import object.OBJ_Shield_Wood;
+import object.OBJ_Sword_Normal;
+import object.SuperObject;
 
 import javax.imageio.ImageIO;
 import javax.swing.plaf.basic.BasicTreeUI;
@@ -18,6 +21,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
+    public boolean attackCanceled = false;
 
 
 
@@ -57,8 +61,25 @@ public class Player extends Entity{
         direction="up";
 
         // PLAYER STATUS
+        level = 1;
         MAXlife = 6;
         life = MAXlife;
+        strength = 1; //The more strength he has, the more damage he gives.
+        dexterity = 1; //The more dexterity he has, the less damage he gives.
+        exp = 0;
+        nextLevelExp = 5;
+        coin = 0;
+        currentWeapon = new OBJ_Sword_Normal(gp);
+        currentShield = new OBJ_Shield_Wood(gp);
+        attack = getAttack(); //The total attack value is decided by strength and weapon
+        defense = getDefense(); //The total defense value is decided by dexterity and shield
+    }
+
+    public int getAttack(){
+        return attack = strength * currentWeapon.attackValue;
+    }
+    public int getDefense(){
+        return defense = dexterity * currentShield.defenseValue;
     }
     public void GetPlayerImage()
     {
@@ -139,6 +160,14 @@ public class Player extends Entity{
                     case "right" -> worldX += speed;
                 }
             }
+
+            if (Control.enterPressed == true && attackCanceled == false){
+                gp.playSE(7);
+                attacking = true;
+                spriteCounter = 0;
+            }
+
+            attackCanceled = false;
             Control.enterPressed = false;
             spriteCounter++;
             if (spriteCounter > 12)
@@ -257,11 +286,9 @@ public class Player extends Entity{
     {
         if(gp.Control.enterPressed == true) {
             if (i != 999) {
+                attackCanceled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
-            } else {
-                gp.playSE(7);
-                attacking = true;
             }
         }
     }
