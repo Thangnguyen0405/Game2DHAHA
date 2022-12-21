@@ -122,6 +122,11 @@ public class UI
             //Stop The Game
             gp.gameThread= null;
         }
+
+        //CHARACTER STATE
+        if(gp.gameState == gp.characterState){
+            drawCharacterScreen();
+        }
     }
     public void drawPlayerLife(){
 
@@ -204,6 +209,56 @@ public class UI
         x += gp.tileSize;
         y += gp.tileSize;
         t2.drawString(currentDialogue,x,y);
+    }
+    public void drawCharacterScreen(){
+
+        //CREATE A FRAME
+        final int frameX = gp.tileSize*2;
+        final int frameY = gp.tileSize;
+        final int frameWidth = gp.tileSize*5;
+        final int frameHeight = gp.tileSize*10;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        //TEXT
+        t2.setColor(Color.white);
+        t2.setFont(t2.getFont().deriveFont(32F));
+
+        int testX = frameX + 20;
+        int testY = frameY + gp.tileSize;
+        final int lineHeight = 35;
+
+        //NAME
+        t2.drawString("Level", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Life", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Strength", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Dexterity", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Attack", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Defense", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Exp", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Next Level", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Coin", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Weapon", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Sheild", testX, testY);
+        testY += lineHeight;
+
+        //VALUES
+        int tailX = (frameX + frameWidth) - 30;
+        //Reset textY
+        testY = frameY + gp.tileSize;
+        String value;
+
+        value = String.valueOf(gp.playerT.level);
+
     }
     public void drawSubWindow(int x, int y, int width, int height){
 
