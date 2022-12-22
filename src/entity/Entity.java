@@ -92,6 +92,11 @@ public class Entity
             if(gp.playerT.invincible == false){
                 //We can give damage
                 gp.playSE(6);
+
+                int damage = attack - gp.playerT.defense;
+                if(damage < 0){
+                    damage = 0;
+                }
                 gp.playerT.life -= 1;
                 gp.playerT.invincible = true;
             }
@@ -108,7 +113,7 @@ public class Entity
             }
         }
         spriteCounter++;
-        if (spriteCounter >32)
+        if (spriteCounter >12)
         {
             if(spriteNum == 1)
             {

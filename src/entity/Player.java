@@ -161,13 +161,6 @@ public class Player extends Entity{
                 }
             }
 
-            if (Control.enterPressed == true && attackCanceled == false){
-                gp.playSE(7);
-                attacking = true;
-                spriteCounter = 0;
-            }
-
-            attackCanceled = false;
             Control.enterPressed = false;
             spriteCounter++;
             if (spriteCounter > 12)
@@ -286,9 +279,12 @@ public class Player extends Entity{
     {
         if(gp.Control.enterPressed == true) {
             if (i != 999) {
-                attackCanceled = true;
                 gp.gameState = gp.dialogueState;
                 gp.npc[i].speak();
+            }
+            else{
+                gp.playSE(7);
+                attacking = true;
             }
         }
     }
@@ -299,7 +295,13 @@ public class Player extends Entity{
         if(i != 999){
             if(invincible == false) {
                 gp.playSE(6);
-                life -= 1;
+
+                int damage = gp.monster[i].attack - defense;
+                if(damage < 0){
+                    damage = 0;
+                }
+
+                life -= damage;
                 invincible = true;
 
             }
@@ -314,8 +316,13 @@ public class Player extends Entity{
 
             if(gp.monster[i].invincible == false){
 
+                int damage = attack - gp.monster[i].defense;
+                if(damage < 0){
+                    damage = 0;
+                }
+
                 gp.playSE(5);
-                gp.monster[i].life -= 1;
+                gp.monster[i].life -= damage;
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
 
