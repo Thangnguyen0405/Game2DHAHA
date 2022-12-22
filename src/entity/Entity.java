@@ -108,7 +108,7 @@ public class Entity
             }
         }
         spriteCounter++;
-        if (spriteCounter >32)
+        if (spriteCounter >12)
         {
             if(spriteNum == 1)
             {
