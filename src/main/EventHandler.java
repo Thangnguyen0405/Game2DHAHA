@@ -84,6 +84,7 @@ public class EventHandler {
             gp.playSE(2);
             gp.ui.currentDialogue = "You drink the water.\nYour life has been recovered.";
             gp.playerT.life = gp.playerT.MAXlife;
+            gp.aSetter.setMonster();
         }
     }
 }
