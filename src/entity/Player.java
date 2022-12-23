@@ -325,12 +325,34 @@ public class Player extends Entity{
                 gp.monster[i].life -= damage;
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
+                gp.ui.showMessage(damage + "damage!");
 
                 if(gp.monster[i].life <= 0){
                     gp.monster[i].dying = true;
+                    gp.ui.showMessage("Killed the Monster!");
+                    gp.ui.showMessage("EXP + " + gp.monster[i].exp);
+                    exp += gp.monster[i].exp;
+                    checkLevelUp();
                 }
             }
 
+        }
+    }
+    public void checkLevelUp(){
+
+        if(exp >= nextLevelExp){
+
+            level++;
+            nextLevelExp = nextLevelExp * 2;
+            MAXlife += 2;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defense = getDefense();
+
+            gp.playSE(8);
+            gp.gameState = gp.dialogueState;
+            gp.ui.currentDialogue = "You are level " + level + "now!\n" + "You feel stronger!";
         }
 
     }

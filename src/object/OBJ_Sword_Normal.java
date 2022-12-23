@@ -19,7 +19,7 @@ public class OBJ_Sword_Normal extends SuperObject {
         {
             e.printStackTrace();
         }
-        attackValue = 4;
+        attackValue = 1;
     }
 
 }
