@@ -96,8 +96,24 @@ public class KeyInput implements KeyListener
         }
     }
     public void characterState(int code){
-        if(code == KeyEvent.VK_C){
+        if(code == KeyEvent.VK_C) {
             gp.gameState = gp.playState;
+        }
+        if (code == KeyEvent.VK_W) {
+            gp.ui.slotRow--;
+            gp.playSE(9);
+        }
+        if (code == KeyEvent.VK_A) {
+            gp.ui.slotCol--;
+            gp.playSE(9);
+        }
+        if (code == KeyEvent.VK_S) {
+            gp.ui.slotRow++;
+            gp.playSE(9);
+        }
+        if (code == KeyEvent.VK_D) {
+            gp.ui.slotCol++;
+            gp.playSE(9);
         }
     }
 
