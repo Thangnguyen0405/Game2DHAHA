@@ -112,4 +112,6 @@ public class AssetSetter {
         gp.monster[i].worldY = gp.tileSize*42;
         i++;
     }
+
+
 }

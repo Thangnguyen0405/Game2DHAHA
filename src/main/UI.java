@@ -25,6 +25,7 @@ public class UI
     public String currentDialogue = "";
     public int slotCol = 0;
     public int slotRow = 0;
+    public int commandNum = 0;
 
     public UI(GamePanel gp)
     {
@@ -130,6 +131,50 @@ public class UI
         if(gp.gameState == gp.characterState){
             drawCharacterScreen();
             drawInventory();
+        }
+
+        //GAMEOVER STATE
+        if(gp.gameState == gp.gameOverState){
+            drawGameOverScreen();
+        }
+    }
+    public void drawGameOverScreen(){
+
+        t2.setColor(new Color(0,0,0,155));
+        t2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        int x;
+        int y;
+        String text;
+        t2.setFont(t2.getFont().deriveFont(Font.BOLD, 110f));
+
+        text = "Game Over!";
+        t2.setColor(Color.black);
+        x = getXForCenteredText(text);
+        y = gp.tileSize*4;
+        t2.drawString(text,x,y);
+
+        //Main
+        t2.setColor(Color.white);
+        t2.drawString(text, x-4, y-4);
+
+        //Retry
+        t2.setFont(t2.getFont().deriveFont(50f));
+        text = "Retry";
+        x = getXForCenteredText(text);
+        y += gp.tileSize*4;
+        t2.drawString(text,x,y);
+        if(commandNum == 0) {
+            t2.drawString(">", x-40, y);
+        }
+
+        //Back to the title screen
+        text = "Quit";
+        x = getXForCenteredText(text);
+        y += 55;
+        t2.drawString(text,x,y);
+        if(commandNum == 1){
+            t2.drawString(">", x-40, y);
         }
     }
     public void drawPlayerLife(){
@@ -326,6 +371,7 @@ public class UI
         final int slotYstart = frameY + 20;
         int slotX = slotXstart;
         int slotY = slotYstart;
+
 
         //CURSOR
         int cursorX = slotXstart + (gp.tileSize * slotCol);
