@@ -2,26 +2,20 @@ package entity;
 
 import main.GamePanel;
 import main.KeyInput;
-import main.UtilityTool;
+import object.OBJ_Key;
 import object.OBJ_Shield_Wood;
 import object.OBJ_Sword_Normal;
-import object.SuperObject;
 
-import javax.imageio.ImageIO;
-import javax.swing.plaf.basic.BasicTreeUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.awt.Graphics2D;
-import java.util.Objects;
 
 public class Player extends Entity{
     public KeyInput Control;
     public final int screenX;
     public final int screenY;
     public int hasKey = 0;
-    public boolean attackCanceled = false;
+
 
 
 
@@ -74,6 +68,18 @@ public class Player extends Entity{
         attack = getAttack(); //The total attack value is decided by strength and weapon
         defense = getDefense(); //The total defense value is decided by dexterity and shield
     }
+
+    public void setDefaultPosition(){
+
+        worldX = gp.tileSize * 23;
+        worldY = gp.tileSize * 21;
+    }
+    public void restoreLife(){
+
+        life = MAXlife;
+        invincible = false;
+    }
+
 
     public int getAttack(){
         return attack = strength * currentWeapon.attackValue;
@@ -185,6 +191,10 @@ public class Player extends Entity{
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+        if(life <= 0){
+            gp.gameState = gp.gameOverState;
+            gp.playSE(10);
         }
     }
 

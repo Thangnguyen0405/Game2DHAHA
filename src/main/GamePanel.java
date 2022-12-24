@@ -48,6 +48,8 @@ public class GamePanel extends JPanel implements Runnable
     public final int pauseState =2;
     public final int dialogueState = 3;
     public final int characterState = 4;
+    public final int gameOverState = 5;
+
     
     public GamePanel()
     {
@@ -227,13 +229,28 @@ public class GamePanel extends JPanel implements Runnable
             }
 
         }
-    public void playMusic(int i)
-    {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+
+        public void retry(){
+        playerT.setDefaultPosition();
+        playerT.restoreLife();
+        aSetter.setNPC();
+        aSetter.setMonster();
     }
-    public void stopMusic()
+    public void restart(){
+        playerT.setDefaultPosition();
+        playerT.setDefaultValue();
+        playerT.restoreLife();
+        aSetter.setObject();
+        aSetter.setNPC();
+        aSetter.setMonster();
+    }
+        public void playMusic(int i)
+        {
+            sound.setFile(i);
+            sound.play();
+            sound.loop();
+        }
+        public void stopMusic()
     {
         sound.stop();
     }

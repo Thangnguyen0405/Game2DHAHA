@@ -37,6 +37,9 @@ public class KeyInput implements KeyListener
         else if (gp.gameState == gp.characterState){
             characterState(code);
         }
+        else if (gp.gameState == gp.gameOverState){
+            gameOverState(code);
+        }
     }
     public void titleState(int code){
         if(code == KeyEvent.VK_SPACE)
@@ -100,20 +103,54 @@ public class KeyInput implements KeyListener
             gp.gameState = gp.playState;
         }
         if (code == KeyEvent.VK_W) {
-            gp.ui.slotRow--;
-            gp.playSE(9);
+            if(gp.ui.slotRow != 0) {
+                gp.ui.slotRow--;
+                gp.playSE(9);
+            }
         }
         if (code == KeyEvent.VK_A) {
-            gp.ui.slotCol--;
-            gp.playSE(9);
+            if(gp.ui.slotCol != 0) {
+                gp.ui.slotCol--;
+                gp.playSE(9);
+            }
         }
         if (code == KeyEvent.VK_S) {
-            gp.ui.slotRow++;
-            gp.playSE(9);
+            if(gp.ui.slotRow != 3) {
+                gp.ui.slotRow++;
+                gp.playSE(9);
+            }
         }
         if (code == KeyEvent.VK_D) {
-            gp.ui.slotCol++;
+            if(gp.ui.slotCol != 4) {
+                gp.ui.slotCol++;
+                gp.playSE(9);
+            }
+        }
+    }
+    public void gameOverState(int code){
+        if(code == KeyEvent.VK_W){
+            gp.ui.commandNum--;
+            if(gp.ui.commandNum < 0){
+                gp.ui.commandNum = 1;
+            }
             gp.playSE(9);
+        }
+        if(code == KeyEvent.VK_S){
+            gp.ui.commandNum++;
+            if(gp.ui.commandNum > 1){
+                gp.ui.commandNum = 0;
+            }
+            gp.playSE(9);
+        }
+        if(code == KeyEvent.VK_ENTER){
+            if(gp.ui.commandNum == 0){
+                gp.gameState = gp.playState;
+                gp.retry();
+            }
+            else if(gp.ui.commandNum == 1){
+                gp.gameState = gp.TileState;
+                gp.restart();
+            }
         }
     }
 
