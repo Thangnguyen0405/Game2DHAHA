@@ -325,7 +325,7 @@ public class Player extends Entity{
                 gp.monster[i].life -= damage;
                 gp.monster[i].invincible = true;
                 gp.monster[i].damageReaction();
-                gp.ui.showMessage(damage + "damage!");
+                gp.ui.showMessage(damage + " damage!");
 
                 if(gp.monster[i].life <= 0){
                     gp.monster[i].dying = true;
@@ -352,7 +352,8 @@ public class Player extends Entity{
 
             gp.playSE(8);
             gp.gameState = gp.dialogueState;
-            gp.ui.currentDialogue = "You are level " + level + "now!\n" + "You feel stronger!";
+            gp.ui.currentDialogue = "You are level " + level + " now!"
+                    + " You feel stronger!";
         }
 
     }
