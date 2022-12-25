@@ -18,6 +18,10 @@ public class SuperObject
     public int solidAreaDefaultX = 0;
     public int solidAreaDefaultY = 0;
 
+    //ITEM ATTRIBUTED
+    public int attackValue;
+    public int defenseValue;
+
     UtilityTool uTool = new UtilityTool();
     public void draw(Graphics2D t2, GamePanel gp)
     {

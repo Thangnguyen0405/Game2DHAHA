@@ -23,6 +23,10 @@ public class UI
     DecimalFormat dFormat = new DecimalFormat("#0.0");
     public boolean gameFinished = false;
     public String currentDialogue = "";
+    public int slotCol = 0;
+    public int slotRow = 0;
+    public int commandNum = 0;
+
     public UI(GamePanel gp)
     {
         this.gp = gp;
@@ -122,6 +126,56 @@ public class UI
             //Stop The Game
             gp.gameThread= null;
         }
+
+        //CHARACTER STATE
+        if(gp.gameState == gp.characterState){
+            drawCharacterScreen();
+            drawInventory();
+        }
+
+        //GAMEOVER STATE
+        if(gp.gameState == gp.gameOverState){
+            drawGameOverScreen();
+        }
+    }
+    public void drawGameOverScreen(){
+
+        t2.setColor(new Color(0,0,0,155));
+        t2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        int x;
+        int y;
+        String text;
+        t2.setFont(t2.getFont().deriveFont(Font.BOLD, 110f));
+
+        text = "Game Over!";
+        t2.setColor(Color.black);
+        x = getXForCenteredText(text);
+        y = gp.tileSize*4;
+        t2.drawString(text,x,y);
+
+        //Main
+        t2.setColor(Color.white);
+        t2.drawString(text, x-4, y-4);
+
+        //Retry
+        t2.setFont(t2.getFont().deriveFont(50f));
+        text = "Retry";
+        x = getXForCenteredText(text);
+        y += gp.tileSize*4;
+        t2.drawString(text,x,y);
+        if(commandNum == 0) {
+            t2.drawString(">", x-40, y);
+        }
+
+        //Back to the title screen
+        text = "Quit";
+        x = getXForCenteredText(text);
+        y += 55;
+        t2.drawString(text,x,y);
+        if(commandNum == 1){
+            t2.drawString(">", x-40, y);
+        }
     }
     public void drawPlayerLife(){
 
@@ -205,6 +259,132 @@ public class UI
         y += gp.tileSize;
         t2.drawString(currentDialogue,x,y);
     }
+    public void drawCharacterScreen(){
+
+        //CREATE A FRAME
+        final int frameX = gp.tileSize;
+        final int frameY = gp.tileSize;
+        final int frameWidth = gp.tileSize*5;
+        final int frameHeight = gp.tileSize*9;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        //TEXT
+        t2.setColor(Color.white);
+        t2.setFont(t2.getFont().deriveFont(25F));
+
+        int testX = frameX + 20;
+        int testY = frameY + gp.tileSize;
+        final int lineHeight = 35;
+
+        //NAME
+        t2.drawString("Level", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Life", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Strength", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Dexterity", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Attack", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Defense", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Exp", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Next Level", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Coin", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Weapon", testX, testY);
+        testY += lineHeight;
+        t2.drawString("Sheild", testX, testY);
+        testY += lineHeight;
+
+        //VALUES
+        int tailX = (frameX + frameWidth) - 30;
+        //Reset textY
+        testY = frameY + gp.tileSize;
+        String value;
+
+        value = String.valueOf(gp.playerT.level);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.life + "/" + gp.playerT.MAXlife);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.strength);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.dexterity);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.attack);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.defense);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.exp);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.nextLevelExp);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+        testY += lineHeight;
+
+        value = String.valueOf(gp.playerT.coin);
+        testX = getXForAlignToRightText(value, tailX);
+        t2.drawString(value, testX, testY);
+
+        t2.drawImage(gp.playerT.currentWeapon.image, tailX - gp.tileSize + 25, testY + 20, null);
+        testY += gp.tileSize +10;
+
+        t2.drawImage(gp.playerT.currentShield.image, tailX - gp.tileSize + 25, testY, null);
+
+
+    }
+    public void drawInventory(){
+
+        //FRAME
+        int frameX = gp.tileSize * 20;
+        int frameY = gp.tileSize ;
+        int frameWidth = gp.tileSize * 6;
+        int frameHeight = gp.tileSize * 5;
+        drawSubWindow(frameX,frameY,frameWidth,frameHeight);
+
+        //SLOT
+        final int slotXstart = frameX + 20;
+        final int slotYstart = frameY + 20;
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+
+
+        //CURSOR
+        int cursorX = slotXstart + (gp.tileSize * slotCol);
+        int cursorY = slotYstart + (gp.tileSize * slotRow);
+        int cursorWidth = gp.tileSize;
+        int cursorHeight = gp.tileSize;
+
+        //DRAW CURSOR
+        t2.setColor(Color.white);
+        t2.setStroke(new BasicStroke(3));
+        t2.drawRoundRect(cursorX,cursorY,cursorWidth,cursorHeight,10,10);
+
+    }
     public void drawSubWindow(int x, int y, int width, int height){
 
         Color c = new Color(0,0,0,210);
@@ -220,6 +400,13 @@ public class UI
     {
         int length =(int)t2.getFontMetrics().getStringBounds(text,t2).getWidth();
         int x = gp.screenWidth/2 - length/2;
+        return x;
+    }
+
+    public int getXForAlignToRightText(String text, int tailX)
+    {
+        int length =(int)t2.getFontMetrics().getStringBounds(text,t2).getWidth();
+        int x = tailX - length;
         return x;
     }
 }
