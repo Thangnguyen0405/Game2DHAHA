@@ -1,5 +1,5 @@
 # LAST_HOPE Team's OOP Project 
-# PrivateKing
+# Private_King game
 1. About Team: 
 
 Tôn Thất Minh Vũ _ ITITIU20356
