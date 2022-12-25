@@ -1,5 +1,6 @@
 package main;
 
+import javax.naming.ldap.Control;
 import java.awt.*;
 
 public class EventHandler {
@@ -29,12 +30,12 @@ public class EventHandler {
     }
 
     public void checkEvent(){
-        if(hit(27,16,"right") == true) {
-            damagePit(gp.dialogueState);
-        }
-//        if(hit(27,16,"right") == true){
-//            teleport(gp.dialogueState);
+//        if(hit(27,16,"right") == true) {
+//            damagePit(gp.dialogueState);
 //        }
+        if(hit(27,16,"right") == true){
+            teleport(gp.dialogueState);
+        }
         if(hit(23,12,"up") == true) {
             healingPool(gp.dialogueState);
         }
@@ -69,21 +70,21 @@ public class EventHandler {
         gp.playerT.worldX = gp.tileSize*37;
         gp.playerT.worldY = gp.tileSize*10;
     }
-    public void damagePit(int gameState) {
-
-        gp.gameState = gameState;
-        gp.ui.currentDialogue = "You fall into a pit!";
-        gp.playerT.life -= 1;
-
-    }
+//    public void damagePit(int gameState) {
+//
+//        gp.gameState = gameState;
+//        gp.ui.currentDialogue = "You fall into a pit!";
+//        gp.playerT.life -= 1;
+//
+//    }
     public void healingPool(int gameState) {
-        if(gp.Control.enterPressed == true){
+        if (gp.Control.enterPressed == true) {
+
             gp.gameState = gameState;
+            gp.playSE(2);
             gp.ui.currentDialogue = "You drink the water.\nYour life has been recovered.";
             gp.playerT.life = gp.playerT.MAXlife;
+            gp.aSetter.setMonster();
         }
-
     }
-
-
 }

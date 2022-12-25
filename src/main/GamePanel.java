@@ -9,25 +9,24 @@ import java.awt.*;
 
 public class GamePanel extends JPanel implements Runnable
 {
+    //FPS
     int FPS = 60;
+
     //Set Man Hinh
     final int originalTileSize =16;
     final int scale=3;
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol =27;
     public final int maxScreenRow = 15;
-    //
     public final int screenWidth = tileSize * maxScreenCol;//1920pixels
     public final int screenHeight = tileSize * maxScreenRow;//1080pixels
+
     //MAP SETTINGS
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize* maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
-    //
 
+    //SYSTEM
     public KeyInput Control = new KeyInput(this);//KeyInput.java
-    //
     TileManager tileM= new TileManager(this);
     Sound sound = new Sound();
     Thread gameThread;
@@ -35,14 +34,23 @@ public class GamePanel extends JPanel implements Runnable
     public AssetSetter aSetter = new AssetSetter(this);
     public UI ui = new UI(this);
     public EventHandler eHandler = new EventHandler(this);
+
+    //ENTITY AND OBJECT
     public Player playerT = new Player(this, Control);
     public SuperObject obj[] = new SuperObject[100];
     public Entity npc[] = new Entity[10];
+    public Entity monster[] = new Entity[10];
+
+    //GAME STATE
     public int gameState;
+    public final int TileState = 0;
     public final int playState = 1;
     public final int pauseState =2;
     public final int dialogueState = 3;
-    public final int TileState = 0;
+    public final int characterState = 4;
+    public final int gameOverState = 5;
+
+    
     public GamePanel()
     {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -59,6 +67,7 @@ public class GamePanel extends JPanel implements Runnable
     {
         aSetter.setObject();
         aSetter.setNPC();
+        aSetter.setMonster();
         playMusic(0);
         gameState = TileState;
     }
@@ -149,6 +158,17 @@ public class GamePanel extends JPanel implements Runnable
                        npc[i].update();
                    }
                }
+               for(int i = 0; i < monster.length; i++){
+                   if(monster[i] != null){
+                       if(monster[i].alive == true && monster[i].dying == false) {
+                       monster[i].update();
+                   }
+                   }
+                   if(monster[i] != null){
+                       if(monster[i].alive == false)
+                           monster[i] = null;
+                   }
+               }
             }
             else if(gameState == pauseState)
             {
@@ -185,8 +205,14 @@ public class GamePanel extends JPanel implements Runnable
                         npc[i].draw(t2);
                     }
                 }
+                for (int i = 0; i < monster.length; i++) {
+                    if (monster[i] != null) {
+                        monster[i].draw(t2);
+                    }
+                }
 
-        //
+
+                //
         playerT.draw(t2);
         ui.draw(t2);
             }
@@ -203,13 +229,28 @@ public class GamePanel extends JPanel implements Runnable
             }
 
         }
-    public void playMusic(int i)
-    {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+
+        public void retry(){
+        playerT.setDefaultPosition();
+        playerT.restoreLife();
+        aSetter.setNPC();
+        aSetter.setMonster();
     }
-    public void stopMusic()
+    public void restart(){
+        playerT.setDefaultPosition();
+        playerT.setDefaultValue();
+        playerT.restoreLife();
+        aSetter.setObject();
+        aSetter.setNPC();
+        aSetter.setMonster();
+    }
+        public void playMusic(int i)
+        {
+            sound.setFile(i);
+            sound.play();
+            sound.loop();
+        }
+        public void stopMusic()
     {
         sound.stop();
     }
