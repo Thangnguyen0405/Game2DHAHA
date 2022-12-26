@@ -34,3 +34,10 @@ Tile
 Entity
 
 ![Entityio drawio](https://user-images.githubusercontent.com/91870430/208353988-eef386df-7768-4d83-9bd8-3526a4953bc6.png)
+
+Monster
+
+
+![Monsters io drawio](https://user-images.githubusercontent.com/91870430/209552574-82be6af2-d0c0-4492-b7f1-ebbc07c42318.png)
+
+
