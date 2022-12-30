@@ -1,7 +1,7 @@
 package main;
 
+import Monster.MON_Bat;
 import entity.NPC_OldMan;
-import Monster.MON_GreenSlime;
 import object.OBJ_Boots;
 import object.OBJ_Chest;
 import object.OBJ_Door;
@@ -87,27 +87,27 @@ public class AssetSetter {
 //        gp.monster[1].worldX = gp.tileSize*11;
 //        gp.monster[1].worldY = gp.tileSize*37;
 
-        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i] = new MON_Bat(gp);
         gp.monster[i].worldX = gp.tileSize*21;
         gp.monster[i].worldY = gp.tileSize*38;
         i++;
 
-        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i] = new MON_Bat(gp);
         gp.monster[i].worldX = gp.tileSize*23;
         gp.monster[i].worldY = gp.tileSize*42;
         i++;
 
-        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i] = new MON_Bat(gp);
         gp.monster[i].worldX = gp.tileSize*24;
         gp.monster[i].worldY = gp.tileSize*37;
         i++;
 
-        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i] = new MON_Bat(gp);
         gp.monster[i].worldX = gp.tileSize*34;
         gp.monster[i].worldY = gp.tileSize*42;
         i++;
 
-        gp.monster[i] = new MON_GreenSlime(gp);
+        gp.monster[i] = new MON_Bat(gp);
         gp.monster[i].worldX = gp.tileSize*38;
         gp.monster[i].worldY = gp.tileSize*42;
         i++;
