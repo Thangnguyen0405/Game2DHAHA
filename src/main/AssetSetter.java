@@ -77,6 +77,7 @@ public class AssetSetter {
         int i = 0;
 
 
+<<<<<<< Updated upstream
         gp.monster[0] = new MON_Bat(gp);
         gp.monster[0].worldX = gp.tileSize*11;
         gp.monster[0].worldY = gp.tileSize*10;
@@ -89,6 +90,15 @@ public class AssetSetter {
         gp.monster[i].worldX = gp.tileSize*12;
         gp.monster[i].worldY = gp.tileSize*20;
         i++;
+=======
+        gp.monster[0] = new MON_GreenSlime(gp);
+        gp.monster[0].worldX = gp.tileSize*11;
+        gp.monster[0].worldY = gp.tileSize*10;
+
+        gp.monster[1] = new MON_GreenSlime(gp);
+        gp.monster[1].worldX = gp.tileSize*11;
+        gp.monster[1].worldY = gp.tileSize*37;
+>>>>>>> Stashed changes
 
         gp.monster[i] = new MON_Bat(gp);
         gp.monster[i].worldX = gp.tileSize*13;
