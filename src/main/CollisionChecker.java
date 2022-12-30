@@ -133,8 +133,6 @@ public class CollisionChecker
     //NPC OR MONSTER
     public int checkEntity(Entity entity,Entity[] target )
     {
-
-
         int index = 999;
 
         for(int i = 0; i< target.length; i++) {
