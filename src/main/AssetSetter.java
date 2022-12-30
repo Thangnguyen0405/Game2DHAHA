@@ -76,10 +76,6 @@ public class AssetSetter {
     public void setMonster(){
         int i = 0;
 
-        gp.monster[i] = new MON_Bat(gp);
-        gp.monster[i].worldX = gp.tileSize*13;
-        gp.monster[i].worldY = gp.tileSize*22;
-        i++;
 
         gp.monster[i] = new MON_Bat(gp);
         gp.monster[i].worldX = gp.tileSize*11;
